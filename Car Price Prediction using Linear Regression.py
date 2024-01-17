@@ -1,10 +1,5 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# ## Problem Statement:
-# The CarDekho company maintains a database of the cars sold through their platform. The data represents the cars sold by Car Dekho and the car related features. We have to build a linear regression model to predict the Selling price of the car. Calculate all the error metrics and diagnostic plots to check the regression result. The dataset contains data for around 301 cars sold by CarDekho.
-
-# In[10]:
+## Problem Statement:
+# The CarDekho company maintains a database of the cars sold through their platform. The data represents the cars sold by Car Dekho and the car-related features. We have to build a linear regression model to predict the Selling price of the car. Calculate all the error metrics and diagnostic plots to check the regression result. The dataset contains data for around 301 cars sold by CarDekho.
 
 
 import numpy as np
@@ -18,23 +13,15 @@ from scipy import stats
 
 # ## Read the cars dataset
 
-# In[4]:
-
-
 car = pd.read_csv("car data.csv")
-
-
-# In[5]:
-
 
 car.head(10)
 
 
-# ## Exploratory Data Analysis (EDA) 
+## Exploratory Data Analysis (EDA) 
 
 # Data quality check
 
-# In[6]:
 
 
 print(car.info())
@@ -43,16 +30,10 @@ print(car.describe())
 
 # Check for missing values
 
-# In[7]:
-
-
 print(car.isnull().sum())
 
 
 # Correlation matrix to identify linear relationships
-
-# In[11]:
-
 
 correlation_matrix = car.corr()
 sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f")
@@ -60,25 +41,16 @@ plt.title('Correlation Matrix')
 plt.show()
 
 
-# ## Transform the categorical data.
-
-# In[12]:
-
-
+## Transform the categorical data.
 car_final = car.drop(['Car_Name','Selling_Price'], axis =1)
-
-
-# In[13]:
-
 
 car_final = pd.get_dummies(car_final)
 car_final.shape
 car_final.head()
 
 
-# ## Multiple Linear Regression model
+## Multiple Linear Regression model
 
-# In[16]:
 
 
 X = car_final
@@ -92,58 +64,12 @@ res = sm.OLS(y_train, X_train).fit()
 print(res.summary())
 
 
-# ## Feature Importance
-
-# In[17]:
-
+## Feature Importance
 
 feature_importance = pd.Series(res.params)
 feature_importance.plot(kind='barh')
 plt.title('Feature Importance (Statsmodels)')
 plt.xlabel('Coefficients')
 plt.show()
-
-
-# 
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
 
 
